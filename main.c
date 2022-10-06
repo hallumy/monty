@@ -1,10 +1,14 @@
 #include "monty.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 int main(int argc, char* argv[])
 {
-	ssize_t read = 0;
-	size_t n = 0;
-	char *lineptr = NULL, token, **av;
+	ssize_t read = 1;
+	size_t n;
+	char *lineptr = NULL, *token, **av;
 	FILE *file;
+	int x = 0;
 
 	if (argc != 2)
 	{
@@ -20,7 +24,7 @@ int main(int argc, char* argv[])
 	}
 	while (read > 0)
 	{
-		read = getline(&lineptr, &n, stdin);
+		read = getline(&lineptr, &n, file);
 		if (read == -1)
 			break;
 		token = strtok(lineptr, " ");
@@ -29,7 +33,12 @@ int main(int argc, char* argv[])
                 {
                         continue;
                 }
+	x++;
 	}
+	free(lineptr);
+	fclose(file);
+	exit(EXIT_SUCCESS);
+
 	return (0);
 }
 
@@ -41,7 +50,8 @@ int main(int argc, char* argv[])
  */
 char **input_tokenizer(char *str)
 {
-	int count = 1, j = 0;
+	int count = 1;
+	size_t j = 0;
 	char *token = NULL;
 	char *ptr = NULL;
 	char **argv = NULL;
@@ -63,10 +73,9 @@ char **input_tokenizer(char *str)
         }
         else
         {
-		ptr = strdup(str);
 		token = strtok(ptr, " ");
                 while (token)
-                {       
+                {
                         token = strtok(NULL, " ");
                         count++;
                 }
@@ -81,7 +90,6 @@ char **input_tokenizer(char *str)
                 while (token)
                 {
                         argv[j] = NULL;
-                        argv[j] = strdup(token);
                         j++;
                         token = strtok(NULL, " ");
                 }

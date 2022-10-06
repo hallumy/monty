@@ -4,11 +4,13 @@
 
 int main(int argc, char* argv[])
 {
-	ssize_t read = 1;
-	size_t n;
+	/* ssize_t read = 1;*/
+	char *read;
+	/*size_t n;*/
 	char *lineptr = NULL, *token, **av;
 	FILE *file;
 	int x = 0;
+	char str_l[100];
 
 	if (argc != 2)
 	{
@@ -22,10 +24,11 @@ int main(int argc, char* argv[])
 	{
 		printf("Error: Can't open file, %s\n", argv[1]);
 	}
-	while (read > 0)
+	while (read != NULL)
 	{
-		read = getline(&lineptr, &n, file);
-		if (read == -1)
+		/* read = getline(&lineptr, &n, file);*/
+		read = fgets(str_l,100, file);
+		if (read == NULL)
 			break;
 		token = strtok(lineptr, " ");
                 av = input_tokenizer(token);

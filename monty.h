@@ -44,6 +44,13 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-int main(int argc, char* argv[]);
-char **input_tokenizer(char *str);
-#endif /* MAIN_H */
+/*extern stack_t *head;*/
+
+typedef void (*op_func)(stack_t **, unsigned int);
+int main(int argc, char **argv);
+int input_tokenizer(char *str, int line_number, int format)
+
+void exec_func(char *opcode, char *value, int ln, int format);
+void call_fun(op_func f, char *opcode, char *value, int ln, int format);
+int input_tokenizer(char *str, int line_number, int format);
+#endif

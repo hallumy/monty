@@ -1,10 +1,18 @@
 #include "monty.h"
-int main(int argc, char* argv[])
+/*stack_t *head = NULL;*/
+/**
+ * main - Entry point
+ * @argc: Number of command line arguments
+ * @argv: Array containing the  arguments
+ * Return: 0 Always (success)
+ */
+int main(int argc, char **argv)
 {
 	ssize_t read = 0;
 	size_t n = 0;
-	char *lineptr = NULL, token, **av;
+	char *lineptr = NULL, *token;
 	FILE *file;
+	int ln, format = 0;
 
 	if (argc != 2)
 	{
@@ -23,78 +31,40 @@ int main(int argc, char* argv[])
 		read = getline(&lineptr, &n, stdin);
 		if (read == -1)
 			break;
-		token = strtok(lineptr, " ");
-                av = input_tokenizer(token);
-                if (av == NULL)
-                {
-                        continue;
-                }
+                format = input_tokenizer(token, ln, format);
 	}
-	return (0);
+	free(lineptr);
 }
 
 /**
- * input_tokenizer - Separate commands and their arguments
- * @str: Commandline with optional arguments
- * @delim: Character used to separate the words
+ * input_tokenizer - Separate each line into tokens to determine
+ * which function to call
+ * @str: string representing a line in a file
+ * @line_number: Line number for opcode
+ * @format: Specifies the format
  * Return: Nothing
  */
-char **input_tokenizer(char *str)
+int input_tokenizer(char *str, int line_number, int format)
 {
-	int count = 1, j = 0;
-	char *token = NULL;
-	char *ptr = NULL;
-	char **argv = NULL;
+	char *opcode;
+	char *value;
 
 	if (str == NULL)
         {
-                return NULL;
+                printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
         }
-        while (str[j])
-        {
-                if (str[j] != ' ')
-                        break;
-                j++;
-        }
-        if (j == strlen(str))
-        {
-                return (argv);
-                printf("argv is %s\n", argv[0]);
-        }
-        else
-        {
-		ptr = strdup(str);
-		token = strtok(ptr, " ");
-                while (token)
-                {       
-                        token = strtok(NULL, " ");
-                        count++;
-                }
-                argv = malloc(sizeof(*argv) * count);
-                if (argv == NULL)
-                {
-                        printf("There is an error");
-                        exit(1);
-                }
-                token = strtok(str, " ");
-                j = 0;
-                while (token)
-                {
-                        argv[j] = NULL;
-                        argv[j] = strdup(token);
-                        j++;
-                        token = strtok(NULL, " ");
-                }
-                argv[j] = NULL;
-                free(ptr);
-                return (argv);
+        opcode = strtok(str, "\n");
+	/* Dealing with blank lines */
+	if (opcode == NULL)
+		return (format);
+	value = strtok(NULL, "\n");
 
-        }
+	if (strcmp(opcode, "queue") == 0)
+		return (1);
+	else if (strcmp(opcode, "stack") == 0)
+		return (0);
+	
+	exec_func(opcode, value, line_number, format);
+	return (format);
 }
-
-
-/**
- *
- * 
- *
-void exec_func(char *op, int ln,*/

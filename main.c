@@ -26,10 +26,11 @@ int main(int argc, char **argv)
 	{
 		printf("Error: Can't open file, %s\n", argv[1]);
 	}
-	while (read > 0)
+	while (read != NULL)
 	{
-		read = getline(&lineptr, &n, stdin);
-		if (read == -1)
+		/* read = getline(&lineptr, &n, file);*/
+		read = fgets(str_l, 100, file);
+		if (read == NULL)
 			break;
                 format = input_tokenizer(token, ln, format);
 	}
@@ -37,11 +38,8 @@ int main(int argc, char **argv)
 }
 
 /**
- * input_tokenizer - Separate each line into tokens to determine
- * which function to call
- * @str: string representing a line in a file
- * @line_number: Line number for opcode
- * @format: Specifies the format
+ * input_tokenizer - Separate commands and their arguments
+ * @str: Commandline with optional arguments
  * Return: Nothing
  */
 int input_tokenizer(char *str, int line_number, int format)

@@ -1,3 +1,5 @@
+#include "monty.h"
+#include <ctype.h>
 /**
  * exec_func - Finds and executes the appropite function to run 
  * the opcode instructions.
@@ -7,6 +9,7 @@
  * @format: Format specifier. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
  */
+
 void exec_func(char *opcode, char *value, int ln, int format)
 {
 	int index;
@@ -14,7 +17,7 @@ void exec_func(char *opcode, char *value, int ln, int format)
 
 	instruction_t func_list[] = {
 		{"push", add_to_stack},
-		{"pall", print_stack},
+		{"pall", print_all},
 		{NULL, NULL}
 	};
 
@@ -60,11 +63,11 @@ void call_fun(op_func f, char *opcode, char *value, int ln, int format)
 		}
 		/*val is not a digit is the return value is 0*/
 		if (value == NULL)
-			printf("L<line_number>: usage: push integer\n", ln);
-		for (index = 0; value[index] != '\0'; i++)
+			printf("L%d: usage: push integer\n", ln);
+		for (index = 0; value[index] != '\0'; index++)
 		{
 			if (isdigit(value[index]) == 0)
-				printf("L<line_number>: usage: push integer\n", ln);
+				printf("L%d: usage: push integer\n", ln);
 		}
 		node = create_node(atoi(value) * flag);
 		if (format == 0)
@@ -75,3 +78,26 @@ void call_fun(op_func f, char *opcode, char *value, int ln, int format)
 	else
 		f(&head, ln);
 }
+
+
+stack_t *create_node(int n)
+{
+	stack_t *node;
+	node = malloc(sizeof(stack_t));
+
+	if (node == NULL)
+		printf("Error: malloc failed\n");
+	node->next = NULL;
+	node->prev = NULL;
+	node->n = n;
+
+	return (node);
+}
+
+
+
+
+
+
+
+

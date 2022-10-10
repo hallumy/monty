@@ -1,7 +1,7 @@
 #include "monty.h"
 #include <ctype.h>
 /**
- * exec_func - Finds and executes the appropite function to run 
+ * exec_func - Finds and executes the appropite function to run
  * the opcode instructions.
  * @opcode: The operation code, It could be push, pint, ...
  * @value: The possible value for the operation.
@@ -40,8 +40,8 @@ void exec_func(char *opcode, char *value, int ln, int format)
 /**
  * call_fun - Calls the required function.
  * @f: Pointer to the function that is about to be called.
- * @op: string representing the opcode.
- * @val: string representing a numeric value.
+ * @opcode: string representing the opcode.
+ * @value: string representing a numeric value.
  * @ln: line numeber for the instruction.
  * @format: Format specifier. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
@@ -79,10 +79,16 @@ void call_fun(op_func f, char *opcode, char *value, int ln, int format)
 		f(&head, ln);
 }
 
+/**
+ * create_node - Creates a node
+ * @n: Data to go in the node
+ * Return: Pointer to node on sucess. Otherwise NULL
+ */
 
 stack_t *create_node(int n)
 {
 	stack_t *node;
+
 	node = malloc(sizeof(stack_t));
 
 	if (node == NULL)
@@ -92,4 +98,22 @@ stack_t *create_node(int n)
 	node->n = n;
 
 	return (node);
+}
+
+/**
+ * free_nodes - Frees nodes in the stack
+ */
+void free_nodes(void)
+{
+	stack_t *temp;
+
+	if (head == NULL)
+		return;
+
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
 }

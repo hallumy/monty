@@ -51,4 +51,5 @@ void add_to_stack(stack_t **newP, unsigned int ln);
 void print_all(stack_t **stack, unsigned int line_number);
 stack_t *create_node(int d);
 void add_to_queue(stack_t **newP, unsigned int line_number);
+void free_nodes();
 #endif

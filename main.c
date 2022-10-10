@@ -28,7 +28,6 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-
 	ln = 1;
 	while (read > 0)
 	{
@@ -38,6 +37,8 @@ int main(int argc, char **argv)
 		{
 			format = input_tokenizer(res, ln, format);
 		}
+		if (read == -1)
+			break;
 		ln++;
 		free(res);
 	}

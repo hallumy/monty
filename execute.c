@@ -93,11 +93,3 @@ stack_t *create_node(int n)
 
 	return (node);
 }
-
-
-
-
-
-
-
-

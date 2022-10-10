@@ -8,7 +8,6 @@
 void add_to_stack(stack_t **newP, __attribute__((unused)) unsigned int ln)
 {
 	stack_t *temp;
-	printf("add to stack\n");
 
 	if (newP == NULL || *newP == NULL)
 		exit(EXIT_FAILURE);
@@ -21,7 +20,6 @@ void add_to_stack(stack_t **newP, __attribute__((unused)) unsigned int ln)
 	head = *newP;
 	head->next = temp;
 	temp->prev = head;
-	printf("end of stack\n");
 }
 /**
  * print_all - Print a node of the stack
@@ -31,7 +29,6 @@ void add_to_stack(stack_t **newP, __attribute__((unused)) unsigned int ln)
 void print_all(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *temp = NULL;
-	printf("print_all\n");
 
 	if (stack == NULL)
 		/**exit(EXIT_FAILURE)*/
@@ -67,12 +64,3 @@ void add_to_queue(stack_t **newP, __attribute__((unused))unsigned int line_numbe
 	temp->next = *newP;
 	(*newP)->prev = temp;
 }
-
-
-
-
-
-
-
-
-

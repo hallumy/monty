@@ -34,7 +34,7 @@ void exec_func(char *opcode, char *value, int ln, int format)
 		}
 	}
 	if (flag == 1)
-		printf("L%d:unknown instruction%s\n", ln, opcode);
+		printf("L%d: unknown instruction %s\n", ln, opcode);
 }
 
 /**
@@ -63,11 +63,11 @@ void call_fun(op_func f, char *opcode, char *value, int ln, int format)
 		}
 		/*val is not a digit is the return value is 0*/
 		if (value == NULL)
-			fprintf(stderr, "L%d:usage:push integer\n", ln);
+			fprintf(stderr, "L%d: usage: push integer\n", ln);
 		for (index = 0; value[index] != '\0'; index++)
 		{
 			if (isdigit(value[index]) == 0)
-				fprintf(stderr, "L%d:usage:push integer\n", ln);
+				fprintf(stderr, "L%d: usage: push integer\n", ln);
 		}
 		node = create_node(atoi(value) * flag);
 		if (format == 0)

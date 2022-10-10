@@ -8,16 +8,16 @@ stack_t *head = NULL;
  */
 int main(int argc, char **argv)
 {
-	/*ssize_t read = 0;*/
+	ssize_t read = 1;
 	char *res;
-/*	size_t n = 0;*/
+	size_t n = 0;
 /*	char *lineptr = NULL;*/
 	FILE *file;
-	int ln = 0, format = 100, i = 0;
-	char str_l[100];
+	int ln, format = 0;
+/*	char str_l[100];*/
 
 
-	res = malloc(sizeof(char));
+/*	res = malloc(sizprintf("Error: Can't open file, %s\n", argv[1]eof(char));*/
 
 	if (argc != 2)
 	{
@@ -31,28 +31,26 @@ int main(int argc, char **argv)
 	{
 		printf("Error: Can't open file, %s\n", argv[1]);
 	}
+
 	/*printf("while loop\n");*/
 	/*res = fgets(str_l, 100, file);*/
-
-	while (res != NULL)
-	{
-	/*	read = getline(&lineptr, &n, file);*/
-
-		res = fgets(str_l, 100, file);
-		i++;
-		/*printf("lee, %s\n", res);*/
-		if (res == NULL)
-			break;
-		if (ln > 0)
+	ln = 1;
+	while (read > 0)
+	{	
+		/*res = fgets(str_l, 100, file);*/
+		res = NULL;
+	 	read = getline(&res, &n, file);
+			
+		if (read > 0)
 		{
-                	format = input_tokenizer(res, ln, format);
+			format = input_tokenizer(res, ln, format);
 		/*	printf("format is %d, res is %s", format, res);*/
 		}
 		ln++;
+		free(res);
 	}
-/*	free(res);*/
 	fclose(file);
-	return (0);
+return (0);
 }
 
 /**

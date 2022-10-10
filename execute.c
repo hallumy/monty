@@ -63,11 +63,11 @@ void call_fun(op_func f, char *opcode, char *value, int ln, int format)
 		}
 		/*val is not a digit is the return value is 0*/
 		if (value == NULL)
-			printf("L%d: usage: push integer\n", ln);
+			fprintf(stderr, "L%d: usage: push integer\n", ln);
 		for (index = 0; value[index] != '\0'; index++)
 		{
 			if (isdigit(value[index]) == 0)
-				printf("L%d: usage: push integer\n", ln);
+				fprintf(stderr, "L%d: usage: push integer\n", ln);
 		}
 		node = create_node(atoi(value) * flag);
 		if (format == 0)
@@ -86,7 +86,7 @@ stack_t *create_node(int n)
 	node = malloc(sizeof(stack_t));
 
 	if (node == NULL)
-		printf("Error: malloc failed\n");
+		fprintf(stderr, "Error: malloc failed\n");
 	node->next = NULL;
 	node->prev = NULL;
 	node->n = n;

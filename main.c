@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 
 	if (!file)
 	{
-		printf("Error: Can't open file, %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file, %s\n", argv[1]);
 	}
 
 	/*printf("while loop\n");*/
@@ -67,7 +67,7 @@ int input_tokenizer(char *str, int line_number, int format)
 	/*printf("start of tokenizer\n");*/
 	if (str == NULL)
         {
-                printf("Error: malloc failed\n");
+               fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
         }
         opcode = strtok(str, "\n ");

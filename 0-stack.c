@@ -32,8 +32,8 @@ void print_all(stack_t **stack, __attribute__((unused))
 	stack_t *temp = NULL;
 
 	if (stack == NULL)
-		/**exit(EXIT_FAILURE)*/
-		return;
+		exit(EXIT_FAILURE);
+	/*	return;*/
 	temp = *stack;
 	while (temp != NULL)
 	{

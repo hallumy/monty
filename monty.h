@@ -2,18 +2,11 @@
 #define MONTY_H
 
 
-
 #include <stdio.h>
 #include <string.h>
-#include <stdarg.h>
 #include <stdlib.h>
-#include <limits.h>
 #include <string.h>
-#include <stdio.h>
 #include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <errno.h>
 #include <sys/stat.h>
 
 

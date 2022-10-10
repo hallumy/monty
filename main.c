@@ -10,8 +10,8 @@ int main(int argc, char **argv)
 {
 	/*ssize_t read = 0;*/
 	char *res;
-	/*size_t n = 0;*/
-	char *lineptr = NULL;
+/*	size_t n = 0;*/
+/*	char *lineptr = NULL;*/
 	FILE *file;
 	int ln = 0, format = 100, i = 0;
 	char str_l[100];
@@ -36,19 +36,22 @@ int main(int argc, char **argv)
 
 	while (res != NULL)
 	{
-		/* read = getline(&lineptr, &n, file);*/
+	/*	read = getline(&lineptr, &n, file);*/
+
 		res = fgets(str_l, 100, file);
+		i++;
 		/*printf("lee, %s\n", res);*/
 		if (res == NULL)
 			break;
-		if (res != NULL)
+		if (ln > 0)
 		{
                 	format = input_tokenizer(res, ln, format);
-			/*printf("format is %d, token is %p", format, token);*/
+		/*	printf("format is %d, res is %s", format, res);*/
 		}
-		i++;
+		ln++;
 	}
-	free(lineptr);
+/*	free(res);*/
+	fclose(file);
 	return (0);
 }
 
@@ -69,7 +72,7 @@ int input_tokenizer(char *str, int line_number, int format)
                 printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
         }
-        opcode = strtok(str, " ");
+        opcode = strtok(str, "\n ");
 	/*printf("opcode is %s ", opcode);*/
 	/*opcode = strtok(res, " ");*/
 	/* Dealing with blank lines */

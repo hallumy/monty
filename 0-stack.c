@@ -2,7 +2,7 @@
 
 /**
  * add_to_stack - Adds a node to the stack
- * @new node: Pointer to the new node
+ * @newP: Pointer to the new node
  * @ln: Integer representing the line number of the opcodes
  */
 void add_to_stack(stack_t **newP, __attribute__((unused)) unsigned int ln)
@@ -26,7 +26,8 @@ void add_to_stack(stack_t **newP, __attribute__((unused)) unsigned int ln)
  * @stack: Pointer to pointer toigned int line_number the top node of the stack
  * @line_number: Integer representing the line number of the opcode
  */
-void print_all(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+void print_all(stack_t **stack, __attribute__((unused))
+		unsigned int line_number)
 {
 	stack_t *temp = NULL;
 
@@ -41,25 +42,28 @@ void print_all(stack_t **stack, __attribute__((unused)) unsigned int line_number
 	}
 }
 
-
-void add_to_queue(stack_t **newP, __attribute__((unused))unsigned int line_number)
+/**
+ * add_to_queue - Adds a node to the queue
+ * @newP: Pointer to the new node
+ * @line_number: Integer representing the line number of the opcodes
+ */
+void add_to_queue(stack_t **newP, __attribute__((unused))
+		unsigned int line_number)
 {
 	stack_t *temp;
-	printf("Add to queue 1\n");
 
-        if (newP == NULL || *newP == NULL)
-                exit(EXIT_FAILURE);
-        if (head == NULL)
-        {
-                head = *newP;
-                return;
-        }
-        temp = head;
+	if (newP == NULL || *newP == NULL)
+		exit(EXIT_FAILURE);
+	if (head == NULL)
+	{
+		head = *newP;
+		return;
+	}
+	temp = head;
 
 	while (temp->next != NULL)
 	{
 		temp = temp->next;
-		printf("while loop add to queue\n");
 	}
 	temp->next = *newP;
 	(*newP)->prev = temp;

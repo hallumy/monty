@@ -37,8 +37,6 @@ int main(int argc, char **argv)
 		{
 			format = input_tokenizer(res, ln, format);
 		}
-		if (read == -1)
-			break;
 		ln++;
 		free(res);
 	}
